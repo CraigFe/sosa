@@ -1627,7 +1627,7 @@ let () =
   do_basic_test (module struct
       let test_name = "Of_mutable(int8 Bigarray1.t)"
       let can_have_wrong_char = false
-      open Bigarray
+      open Bigarray_compat
       type char_bigarray = (char, int8_unsigned_elt, c_layout) Array1.t
       module Chr = Native_character
       module Str = Of_mutable.Make (struct

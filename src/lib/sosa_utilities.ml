@@ -2,7 +2,7 @@
 
 open Sosa_pervasives
 
-(** Module to help build `{of,to}_native_[sub]string` functions.
+(** Module to help build [{of,to}_native_(sub)string] functions.
     It is most useful while using variable sized characters. *)
 module Conversions = struct
 

@@ -1,0 +1,8 @@
+(library
+ (name sosa)
+ (public_name sosa)
+ (modules_without_implementation api)
+ (libraries stdlib-shims)
+ (instrumentation (backend bisect_ppx))
+ (flags
+  (:standard -warn-error -A)))

@@ -9,57 +9,31 @@ default:
 	@echo "  coverage     compile sosa_test with instrumented bisect_ppx coverage"
 	@echo "  cov_report   create a coverage report from the latest coverage run"
 	@echo "  clean        remove build directory"
-	@echo "  install      install via ocamlfind"
-	@echo "  uninstall    unintall via ocamlfind"
-	@echo "  merlinize    create .merlin file"
+	@echo "  install      install via Dune"
+	@echo "  uninstall    uninstall via Dune"
 	@echo "  doc          create documentation"
 
 build:
-	ocamlbuild -use-ocamlfind -cflag -safe-string -I src/lib sosa.cmx sosa.cma sosa.cmxa sosa.cmxs
+	dune build
 
 test:
-	ocamlbuild -use-ocamlfind -package nonstd -package unix -package bigarray -cflag -safe-string -I src/lib -I src/test main.native  && \
-	rm -f main.native  && \
-	mv _build/src/test/main.native sosa_tests
+	dune runtest
 
 coverage:
-	ocamlbuild -use-ocamlfind -pkgs nonstd,unix,bigarray,bisect_ppx -cflag -safe-string -I src/lib -I src/test main.native  && \
-	rm -f main.native  && \
-	mv _build/src/test/main.native sosa_tests
-
-clean:
-	ocamlbuild -clean && \
-	rm -f main.native
-
-install:
-	ocamlfind install sosa META \
-		_build/src/lib/sosa.cmi \
-		_build/src/lib/sosa.cmo \
-		_build/src/lib/sosa.cmx \
-		_build/src/lib/sosa.a \
-		_build/src/lib/sosa.o \
-		_build/src/lib/sosa.cma \
-		_build/src/lib/sosa.cmxa \
-		_build/src/lib/sosa.cmxs
-
-uninstall:
-	ocamlfind remove sosa
-
-merlinize:
-	echo 'S .' > .merlin
-	echo 'B _build' >> .merlin
-	echo 'S .' > src/test/.merlin
-	echo 'B ../../_build' >> src/test/.merlin
-	echo 'PKG nonstd' >> src/test/.merlin
-
-doc:
-	cp src/lib/sosa.mlpack sosa.odocl && \
-	ocamlbuild -I src/lib/ -docflags -charset,UTF-8,-keep-code,-colorize-code,-html,-short-functors sosa.docdir/index.html && \
-	rm sosa.docdir && \
-	ln -s _build/sosa.docdir/ doc && \
-	rm sosa.odocl
+	dune runtest --instrument-with bisect_ppx
 
 cov_report:
-	cd _build && \
-	bisect-ppx-report -html ../report_dir ../$(shell ls -t bisect*.out | head -1) && \
-	cd -
+	bisect-ppx-report html
+
+clean:
+	dune clean
+
+install:
+  dune install
+
+uninstall:
+	dune uninstall
+
+doc:
+  dune build @doc
+

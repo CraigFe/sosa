@@ -1,4 +1,6 @@
 _build/
+_coverage/
+_opam
 *.cmp
 sosa_tests
 doc

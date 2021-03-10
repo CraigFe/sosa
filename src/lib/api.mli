@@ -186,7 +186,7 @@ module type BASIC_STRING = sig
       The function is subject to same limitations as
       {!of_character_list} regarding {!max_string_length}. *)
 
-  (** By including {{!modtype:Api.NATIVE_CONVERSIONS} NATIVE_CONVERSIONS}, a
+  (** By including {{!module-type:Api.NATIVE_CONVERSIONS} NATIVE_CONVERSIONS}, a
       basic string provides
       {{!val:Api.NATIVE_CONVERSIONS.of_native_string} of_native_string},
       {{!val:Api.NATIVE_CONVERSIONS.of_native_substring} of_native_substring},
@@ -461,7 +461,7 @@ module type BASIC_STRING = sig
   end
   (** [Make_output(Asynchronous_output_model)] provides a function
       {{!val:Api.BASIC_STRING.Make_output.output}output}
-      given an {{!modtype:Api.OUTPUT_MODEL}OUTPUT_MODEL}. *)
+      given an {{!module-type:Api.OUTPUT_MODEL}OUTPUT_MODEL}. *)
 
 end (* BASIC_STRING *)
 
@@ -571,7 +571,7 @@ module type MINIMALISTIC_MUTABLE_STRING = sig
   val is_whitespace: character -> bool
   (** Tell whether a character is considered whitespace. *)
 
-  (** {{!modtype:MINIMALISTIC_MUTABLE_STRING}MINIMALISTIC_MUTABLE_STRING} requires
+  (** {{!module-type:MINIMALISTIC_MUTABLE_STRING}MINIMALISTIC_MUTABLE_STRING} requires
       {{!val:Api.NATIVE_CONVERSIONS.of_native_string} of_native_string},
       {{!val:Api.NATIVE_CONVERSIONS.of_native_substring} of_native_substring},
       and {{!val:Api.NATIVE_CONVERSIONS.to_native_string} to_native_string}.  *)

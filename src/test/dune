@@ -1,0 +1,5 @@
+(test
+ (name main)
+ (libraries sosa nonstd unix stdlib-shims bigarray-compat)
+ (flags
+  (:standard -warn-error -A)))
